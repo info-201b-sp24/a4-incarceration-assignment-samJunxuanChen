@@ -1,71 +1,45 @@
 ---
-title: "A3: Incarceration"
-output: html_document
+title: 'A3: Incarceration'
+output:
+  pdf_document: default
 ---
 
 ### Introduction
 
-An introduction of the problem domain and a description of the variable(s) you are choosing to analyze (and why!)
+In this analysis, I will examine jail incarceration rates across different racial and gender groups to uncover patterns of inequality. This analysis will focus on racial disparities among Black, White, Native American, Asian American and Pacific Islander (AAPI), and Latinx populations. Additionally, we will analyze gender and age disparities, specifically comparing male adults, female adults, male juveniles, and female juveniles. To provide a localized perspective, we will also investigate jail rates for different races within Washington State. This analysis aims to quantify the extent of these disparities and provide evidence-based insights into systemic biases in the criminal justice system.
 
 ### Summary Information
-
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
-
-These will likely be calculated using your DPLYR skills, answering questions such as: 
-
-- What is the average value of my variable across all the counties (in the current year)?
-- Where is my variable the highest / lowest?
-- How much has my variable change over the last N years?
-
-Feel free to calculate and report values that you find relevant. Again, remember that the purpose is to think about how these measure of incarceration vary by race.
+```{r summary info, message = TRUE, echo=FALSE, warning = FALSE }
+knitr::opts_chunk$set(echo = FALSE)
+source("summary.R")
+```
+Our analysis of jail incarceration rates in the United States reveals significant disparities across different racial and gender groups. Firstly, we found that Black individuals have the highest average jail rate, with an average of `r average_black_rate` per 100,000 people across all counties in the latest year in the dataset, 2018, compared to `r average_white_rate` for White individuals, and the other races, including Asian American and Pacific Islanders and Latinx, `r average_other_rate`. In terms of gender and age from 2018, male adults had an average jail rate of `r average_male_adult_rate`, significantly higher than the `r average_female_adult_rate` for female adults. Additionally, we observed that in Washington State, Native American individuals had the second highest average jail rate among all races besides Black, with an average rate of `r average_native_WA_rate`. These findings underscore the systemic biases present in the criminal justice system, highlighting the need for targeted policy interventions.
 
 ### The Dataset
 
-Who collected the data?  
-How was the data collected or generated?  
-Why was the data collected?  
-How many observations (rows) are in your data?  
-How many features (columns) are in the data?  
-What, if any, ethical questions or questions of power do you need to consider when working with this data?  
-What are possible limitations or problems with this data?   (at least 200 words)
-
-
+  The data was collected by the Vera Institute of Justice. The data was collected from two primary Bureau of Justice Statistics (BJS) data collections: the Census of Jails (COJ), which covers all jails and is conducted every five to eight years since 1970, and the Annual Survey of Jails (ASJ), which covers about one-third of jails-and includes nearly all of the largest jails-that has been conducted in non-census years since 1982. This project was funded by the Robert W. Wilson Charitable Trust.The data was collected to provide detailed insights into jail and prison populations at the county level across the United States. This level of detail is intended to help understand the variability in incarceration practices and outcomes among counties, providing a robust foundation for research and policy-making aimed at addressing mass incarceration.  The number of observations (rows) in the Dataset about prison population per county/state and Dataset about jail population per county/state data are 153811, and Prison/jail population per 100,000 people (rate) per county/state starting at 1990 in Washington is 1131. The number of features (columns) in the Dataset about prison population per county/state and Dataset about jail population per county/state data is 33,  the Dataset about prison population per county/state is 36, and Prison/jail population per 100,000 people (rate) per county/state starting at 1990 in Washington is 23. Working with incarceration data raises several ethical questions and issues of power. One major concern is the potential for data to reinforce negative stereotypes or biases against certain racial or demographic groups. There is also the risk of violating individuals' privacy, even in aggregate data. The data has several potential limitations as there may be gaps or inconsistencies due to varying data collection methods over the years. The presence of numerous N/A values suggests incomplete data, which can lead to biased analyses or conclusions. Additionally, jail and prison data are not uniformly reported across all counties, leading to potential discrepancies. The aggregation of data at the county level may obscure significant variations within counties. Lastly, the evolving nature of incarceration practices and policies means that historical data might not fully reflect current realities or trends.
+  
 ### Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The first chart that you will create and include will show the trend over time of your variable/topic. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - This may mean showing the same measure for different locations or different racial groups. Think carefully about a meaningful comparison of locations (e.g., the top 10 counties in a state, top 10 states, etc.)
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart1_example.R")}
+```{r trendsOverTime, echo = FALSE}
+source("chart1_example.R")
+plot(Black_Jail_Prison_Rates)
 ```
+#Explanation and Patterns
+This chart visualizes the trends in incarceration rates for Black individuals in both jails and prisons from 1990 to 2018. It provides a comparison between national rates and those specific to Washington State (WA).From the 1990s through 2005, the national black prison rate continued to increase and peaked in 2005. The data then remained near the peak until 2013, when it began to generally decline. This may indicate a trend towards reducing the prison population through reforms or alternative measures. The WA black prison rate does not appear to correlate with the national rate and has remained at about the same rate for many years. However, he prison rate and jail rate are very close to each other, and much closer to the national jail and prison rate. However, both national and Washington State data show a decrease in black incarceration and prisonization rates during the study period, suggesting efforts to reform and reduce incarceration rates. However, fluctuating and incomplete data suggest that these efforts are complex and influenced by multiple factors. If the data were more complete and included more accurate information it would make it easier to see trends on this chart.
 
 ### Variable Comparison Chart
-
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The second chart that you will create and include will show how two different (continuous) variables are related to one another. Again, think carefully about what such a comparison means and what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- If you choose to add a color encoding (not required), you need a legend for your different color and a clear legend title
+```{r VariableComparisonChart, echo = FALSE}
+source("chart2_example.R")
+plot(Jail_Prison_Relationship)
+```
+#Explanation and Patterns
+Two different continuous variables in the chart illustrates the relationship between the total jail population and the total prison population across different counties. This chart was included to investigate whether there is a correlation between the sizes of jail and prison populations. By examining this relationship, we can understand how these two forms of incarceration are related at the county level. From the chart, we observe a positive correlation, indicating that counties with larger jail populations also tend to have larger prison populations. This suggests that broader criminal justice policies and practices might influence both forms of incarceration similarly. However, it's important to note that due to data limitations, some counties report zero jail and prison populations, likely because of incomplete or missing data. These gaps highlight the need for more comprehensive data collection to better understand the full scope of incarceration trends across the United States.
 
 ### Map
-
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
-
-The last chart that you will create and include will show how a variable is distributed geographically. Again, think carefully about what such a comparison means and what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Your map needs a title
-- Your color scale needs a legend with a clear label
-- Use a map based coordinate system to set the aspect ratio of your map
-
+```{r map, echo=FALSE}
+source("map_example.R")
+plot(Jail_Population_Map)
+```
+#Explanation and Patterns
+The map visualizes the total jail population by state across the United States. This chart is included to show the geographical distribution of incarceration, highlighting regions with higher jail populations. From the map, we observe that certain states, particularly in the eastern, southern, and western United States, have higher concentrations of jail populations, and the central and northern reign have lower concentrations of jail populations. This pattern indicates regional disparities in incarceration rates, which could be influenced by various factors, including local laws, crime rates, and socio-economic conditions. The color scale helps to easily identify states with higher jail populations, the darker color represents the higher concentrations of jail populations in that state which emphasizing areas where criminal justice interventions may be more heavily concentrated. Same issues as other two charts, some counties report zero jail and prison populations and make the map visualization not complete and comprehensive.
