@@ -1,6 +1,8 @@
 ---
 title: 'A3: Incarceration'
 output:
+  html_document:
+    df_print: paged
   pdf_document: default
 ---
 
